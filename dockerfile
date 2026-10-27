@@ -25,19 +25,19 @@ RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
 RUN cd /usr/src/php/ext/gd && /usr/local/bin/phpize
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
-RUN docker-php-ext-install -j$(nproc) bcmath
-RUN docker-php-ext-install -j$(nproc) ctype
-RUN docker-php-ext-install -j$(nproc) fileinfo
-RUN docker-php-ext-install -j$(nproc) intl
-RUN docker-php-ext-install -j$(nproc) mbstring
-RUN docker-php-ext-install -j$(nproc) mysqli
-RUN docker-php-ext-install -j$(nproc) pdo_mysql
-RUN docker-php-ext-install -j$(nproc) xml
-RUN docker-php-ext-install -j$(nproc) zip
-RUN docker-php-ext-install -j$(nproc) openssl
-RUN docker-php-ext-install -j$(nproc) curl
-RUN docker-php-ext-install -j$(nproc) pcntl
-RUN docker-php-ext-install -j$(nproc) zlib
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install ctype
+RUN docker-php-ext-install fileinfo
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install xml
+RUN docker-php-ext-install zip
+RUN docker-php-ext-install openssl
+RUN docker-php-ext-install curl
+RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install zlib
 RUN rm -rf /usr/src/php
 
 # Install Composer
