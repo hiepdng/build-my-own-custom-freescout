@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 
 # Configure and install PHP extensions needed for FreeScout
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
+#    && docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
     && docker-php-ext-install -j$(nproc) \
         gd \
         imap \
@@ -34,11 +34,12 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         pcntl \
         zlib
 
-# Enable Apache rewrite module for Laravel routing
-RUN a2enmod rewrite
-
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer require webklex/php-imap
+
+# Enable Apache rewrite module for Laravel routing
+RUN a2enmod rewrite
 
 # Set working directory
 WORKDIR /var/www/html
@@ -52,7 +53,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Set the document root to FreeScout's public folder if needed
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
