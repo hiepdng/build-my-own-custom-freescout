@@ -38,6 +38,7 @@ RUN docker-php-ext-install -j$(nproc) openssl
 RUN docker-php-ext-install -j$(nproc) curl
 RUN docker-php-ext-install -j$(nproc) pcntl
 RUN docker-php-ext-install -j$(nproc) zlib
+RUN rm -rf /usr/src/php
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
