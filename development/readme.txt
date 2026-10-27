@@ -17,8 +17,11 @@ dockerfile:
         curl \
         pcntl \
         zlib
-  Install PHP extensions required by FreeScout
-
+  .Install PHP extensions required by FreeScout.
+  .Source extensions: /usr/src/php/ext/
+  .Libraries have been installed in:
+  /usr/local/lib/php/extensions/no-debug-non-zts-20250925/
+  
 - RUN a2enmod rewrite
   will create a link rewrite.load in /etc/apache2/mods-enabled/
   Same as:
