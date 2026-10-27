@@ -10,29 +10,34 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libxml2-dev \
     libonig-dev \
+    libssl-dev \
+    libcurl4-openssl-dev \
     git \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure and install PHP extensions needed for FreeScout
+#RUN docker-php-ext-configure imap --with-imap-ssl --with-kerberos \   #this is for php version <=8.3
+#    && docker-php-ext-install -j$(nproc) imap
+RUN mkdir -p /usr/src/php && tar Jxvf /usr/src/php.tar.xz -C /usr/src/php --strip-components=1
+RUN cp /usr/src/php/ext/openssl/config0.m4 /usr/src/php/ext/openssl/config.m4
+RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
+RUN cd /usr/src/php/ext/gd && /usr/local/bin/phpize
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-#    && docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
-    && docker-php-ext-install -j$(nproc) \
-        gd \
-        imap \
-        bcmath \
-        ctype \
-        fileinfo \
-        intl \
-        mbstring \
-        mysqli \
-        pdo_mysql \
-        xml \
-        zip \
-        openssl \
-        curl \
-        pcntl \
-        zlib
+    && docker-php-ext-install -j$(nproc) gd
+RUN docker-php-ext-install -j$(nproc) bcmath
+RUN docker-php-ext-install -j$(nproc) ctype
+RUN docker-php-ext-install -j$(nproc) fileinfo
+RUN docker-php-ext-install -j$(nproc) intl
+RUN docker-php-ext-install -j$(nproc) mbstring
+RUN docker-php-ext-install -j$(nproc) mysqli
+RUN docker-php-ext-install -j$(nproc) pdo_mysql
+RUN docker-php-ext-install -j$(nproc) xml
+RUN docker-php-ext-install -j$(nproc) zip
+RUN docker-php-ext-install -j$(nproc) openssl
+RUN docker-php-ext-install -j$(nproc) curl
+RUN docker-php-ext-install -j$(nproc) pcntl
+RUN docker-php-ext-install -j$(nproc) zlib
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
