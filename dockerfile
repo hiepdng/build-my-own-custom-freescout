@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     git \
     unzip \
+    php-zip \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure and install PHP extensions needed for FreeScout
