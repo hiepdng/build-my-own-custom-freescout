@@ -2,7 +2,7 @@
 FROM php:8.5.12-apache
 
 # Install required system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y
+RUN apt-get update -y
 RUN apt-get install libpng-dev -y
 RUN apt-get install libjpeg-dev -y
 RUN apt-get install libfreetype6-dev -y
@@ -58,6 +58,10 @@ RUN find . -type f -exec chmod 664 {} \;
 RUN find . -type d -exec chmod 775 {} \;
 RUN find . -name *.sh -exec chmod ug+x {} \;
 RUN chmod -R 775 /var/www/html/freescout/storage /var/www/html/freescout/bootstrap/cache
+
+# Edit .env file
+RUN cp .env.example .env
+RUN 
 
 # Set the document root to FreeScout's public folder if needed
 ENV APACHE_DOCUMENT_ROOT=/var/www/freescout/public
