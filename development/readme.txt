@@ -30,3 +30,4 @@ dockerfile:
 - COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
   Copy composer binary from composer:latest image
 
+FreeScout includes webklex/php-imap natively as its core email-fetching engine, meaning you do not need to install it manually. As of FreeScout version 1.8.140, the developers completely replaced the old PHP IMAP extension with this native PHP library
