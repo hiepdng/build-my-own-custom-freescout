@@ -9,17 +9,16 @@ RUN apt-get install libfreetype6-dev -y
 RUN apt-get install libzip-dev -y
 RUN apt-get install libicu-dev -y
 RUN apt-get install libxml2-dev -y
-RUN apt-get install ibonig-dev -y
+RUN apt-get install libonig-dev -y
 RUN apt-get install libssl-dev -y
 RUN apt-get install libcurl4-openssl-dev -y
+RUN apt-get install libkrb5-dev -y
 RUN apt-get install git -y
 RUN apt-get install zip -y
 RUN apt-get install unzip -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configure and install PHP extensions needed for FreeScout
-#RUN docker-php-ext-configure imap --with-imap-ssl --with-kerberos \   #this is for php version <=8.3
-#    && docker-php-ext-install -j$(nproc) imap
 RUN mkdir -p /usr/src/php && tar Jxvf /usr/src/php.tar.xz -C /usr/src/php --strip-components=1
 RUN cp /usr/src/php/ext/openssl/config0.m4 /usr/src/php/ext/openssl/config.m4
 RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
@@ -39,30 +38,32 @@ RUN docker-php-ext-install openssl
 RUN docker-php-ext-install curl
 RUN docker-php-ext-install pcntl
 RUN docker-php-ext-install zlib
+RUN docker-php-ext-install iconv
 RUN rm -rf /usr/src/php
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer require webklex/php-imap
 
 # Enable Apache rewrite module for Laravel routing
 RUN a2enmod rewrite
 
 # Set working directory
-WORKDIR /var/www/html
+RUN mkdir /var/www/html/freescout
+WORKDIR /var/www/html/freescout
 
 # Download the latest FreeScout stable release
-RUN git clone https://github.com/freescout-help-desk/freescout.git . \
-    && composer install --no-dev --optimize-autoloader
-
-# Set appropriate permissions for Apache
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN git clone https://github.com/freescout-help-desk/freescout.git .
+RUN chown -R www-data:www-data .
+RUN find . -type f -exec chmod 664 {} \;
+RUN find . -type d -exec chmod 775 {} \;
+RUN find . -name *.sh -exec chmod ug+x {} \;
+RUN chmod -R 775 /var/www/html/freescout/storage /var/www/html/freescout/bootstrap/cache
 
 # Set the document root to FreeScout's public folder if needed
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/freescout/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
 
 # Expose HTTP port
 EXPOSE 80
