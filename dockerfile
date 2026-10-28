@@ -2,20 +2,20 @@
 FROM php:8.5.12-apache
 
 # Install required system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    libicu-dev \
-    libxml2-dev \
-    libonig-dev \
-    libssl-dev \
-    libcurl4-openssl-dev \
-    git \
-    zip
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y
+RUN lapt-get install ibpng-dev -y
+RUN lapt-get install libjpeg-dev -y
+RUN lapt-get install libfreetype6-dev -y
+RUN lapt-get install libzip-dev -y
+RUN lapt-get install libicu-dev -y
+RUN lapt-get install libxml2-dev -y
+RUN lapt-get install ibonig-dev -y
+RUN lapt-get install libssl-dev -y
+RUN lapt-get install libcurl4-openssl-dev -y
+RUN lapt-get install git -y
+RUN lapt-get install zip -y
+RUN lapt-get install unzip -y
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configure and install PHP extensions needed for FreeScout
 #RUN docker-php-ext-configure imap --with-imap-ssl --with-kerberos \   #this is for php version <=8.3
