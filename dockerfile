@@ -3,18 +3,18 @@ FROM php:8.5.12-apache
 
 # Install required system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y
-RUN lapt-get install ibpng-dev -y
-RUN lapt-get install libjpeg-dev -y
-RUN lapt-get install libfreetype6-dev -y
-RUN lapt-get install libzip-dev -y
-RUN lapt-get install libicu-dev -y
-RUN lapt-get install libxml2-dev -y
-RUN lapt-get install ibonig-dev -y
-RUN lapt-get install libssl-dev -y
-RUN lapt-get install libcurl4-openssl-dev -y
-RUN lapt-get install git -y
-RUN lapt-get install zip -y
-RUN lapt-get install unzip -y
+RUN apt-get install libpng-dev -y
+RUN apt-get install libjpeg-dev -y
+RUN apt-get install libfreetype6-dev -y
+RUN apt-get install libzip-dev -y
+RUN apt-get install libicu-dev -y
+RUN apt-get install libxml2-dev -y
+RUN apt-get install ibonig-dev -y
+RUN apt-get install libssl-dev -y
+RUN apt-get install libcurl4-openssl-dev -y
+RUN apt-get install git -y
+RUN apt-get install zip -y
+RUN apt-get install unzip -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configure and install PHP extensions needed for FreeScout
@@ -52,7 +52,7 @@ RUN a2enmod rewrite
 WORKDIR /var/www/html
 
 # Download the latest FreeScout stable release
-RUN git clone https://github.com/freescout-help-desk/freescout . \
+RUN git clone https://github.com/freescout-help-desk/freescout.git . \
     && composer install --no-dev --optimize-autoloader
 
 # Set appropriate permissions for Apache
