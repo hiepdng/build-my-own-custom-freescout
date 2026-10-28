@@ -10,12 +10,12 @@ RUN apt-get install libzip-dev -y
 RUN apt-get install libicu-dev -y
 RUN apt-get install libxml2-dev -y
 RUN apt-get install libonig-dev -y
-RUN apt-get install libssl-dev -y
-RUN apt-get install libcurl4-openssl-dev -y
-RUN apt-get install libkrb5-dev -y
+#RUN apt-get install libssl-dev -y
+#RUN apt-get install libcurl4-openssl-dev -y
+#RUN apt-get install libkrb5-dev -y
 RUN apt-get install git -y
 RUN apt-get install zip -y
-RUN apt-get install unzip -y
+#RUN apt-get install unzip -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configure and install PHP extensions needed for FreeScout
@@ -31,14 +31,16 @@ RUN docker-php-ext-install fileinfo
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install mysqli
-RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
-RUN docker-php-ext-install openssl
 RUN docker-php-ext-install curl
-RUN docker-php-ext-install pcntl
-RUN docker-php-ext-install zlib
-RUN docker-php-ext-install iconv
+#RUN docker-php-ext-install pdo_mysql
+#RUN docker-php-ext-install openssl
+#RUN docker-php-ext-install pcntl
+#RUN docker-php-ext-install zlib
+#RUN docker-php-ext-install iconv
+#RUN docker-php-ext-install php-tokenizer
+#RUN docker-php-ext-install php-hash
 RUN rm -rf /usr/src/php
 
 # Install Composer
@@ -46,10 +48,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Enable Apache rewrite module for Laravel routing
 RUN a2enmod rewrite
+RUN a2enmod headers
 
 # Set working directory
-RUN mkdir /var/www/html/freescout
-WORKDIR /var/www/html/freescout
+WORKDIR /var/www/html
 
 # Download the latest FreeScout stable release
 RUN git clone https://github.com/freescout-help-desk/freescout.git .
@@ -57,14 +59,14 @@ RUN chown -R www-data:www-data .
 RUN find . -type f -exec chmod 664 {} \;
 RUN find . -type d -exec chmod 775 {} \;
 RUN find . -name *.sh -exec chmod ug+x {} \;
-RUN chmod -R 775 /var/www/html/freescout/storage /var/www/html/freescout/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Edit .env file
 RUN cp .env.example .env
 RUN 
 
 # Set the document root to FreeScout's public folder if needed
-ENV APACHE_DOCUMENT_ROOT=/var/www/freescout/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/html
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
