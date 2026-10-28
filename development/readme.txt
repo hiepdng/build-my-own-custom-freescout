@@ -1,4 +1,8 @@
-dockerfile:
+php:8.5.12-apache:
+Entrypoint: /usr/local/bin/docker-php-entrypoint
+$ php artisan key:generate   <-auto file APP_KEY in .env file
+
+Dockerfile:
 - RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
     && docker-php-ext-install -j$(nproc) \
@@ -26,6 +30,9 @@ dockerfile:
   will create a link rewrite.load in /etc/apache2/mods-enabled/
   Same as:
   $ ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
+
+- RUN a2enmod headers
+  mod_headers is needed to secure uploads folder
 
 - COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
   Copy composer binary from composer:latest image
