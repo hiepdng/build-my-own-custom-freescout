@@ -1,5 +1,6 @@
 php:8.5.12-apache:
 Entrypoint: /usr/local/bin/docker-php-entrypoint
+CMD: apache2-foreground
 $ php artisan key:generate   <-auto file APP_KEY in .env file
 
 Dockerfile:
@@ -38,3 +39,8 @@ Dockerfile:
   Copy composer binary from composer:latest image
 
 FreeScout includes webklex/php-imap natively as its core email-fetching engine, meaning you do not need to install it manually. As of FreeScout version 1.8.140, the developers completely replaced the old PHP IMAP extension with this native PHP library
+
+
+Debug:
+$ docker logs freescout-app
+$ docker logs freescout-db
