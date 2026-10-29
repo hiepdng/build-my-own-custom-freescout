@@ -10,6 +10,7 @@ services:
     volumes:
       - ./freescout_data:/var/www/html
     environment:
+      ### Freescout variables in .env file
       - APP_URL=http://localhost:8080
       # - SESSION_SECURE_COOKIE=true
       # - APP_PROXY=
