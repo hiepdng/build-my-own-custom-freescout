@@ -34,7 +34,7 @@ RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install curl
-#RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_mysql
 #RUN docker-php-ext-install openssl
 #RUN docker-php-ext-install pcntl
 #RUN docker-php-ext-install zlib
@@ -44,7 +44,7 @@ RUN docker-php-ext-install curl
 RUN rm -rf /usr/src/php
 
 # Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Enable Apache rewrite module for Laravel routing
 RUN a2enmod rewrite
@@ -61,18 +61,19 @@ RUN find . -type d -exec chmod 775 {} \;
 RUN find . -name *.sh -exec chmod ug+x {} \;
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Edit .env file
-RUN cp .env.example .env
-RUN 
-
 # Set the document root to FreeScout's public folder if needed
-ENV APACHE_DOCUMENT_ROOT=/var/www/html
+ENV APACHE_DOCUMENT_ROOT="/var/www/html"
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+# copy setup script
+COPY ./setup /setup
+RUN chmod +x /setup
 
 # Expose HTTP port
 EXPOSE 80
+
+ENTRYPOINT ["/setup"]
 
 # Start Apache
 CMD ["apache2-foreground"]
