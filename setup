@@ -23,3 +23,5 @@ for I in "${MY_VARS[@]}"; do
     echo $I=${!I} >> /var/www/html/.env
   fi
 done
+
+exec docker-php-entrypoint "$@"
