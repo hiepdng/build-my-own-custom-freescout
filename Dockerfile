@@ -63,7 +63,6 @@ RUN rm -rf \
            .gitcommit \
            .github \
            .gitignore \
-           .htaccess \
            .travis.yml \
            *.md \
            LICENSE \
