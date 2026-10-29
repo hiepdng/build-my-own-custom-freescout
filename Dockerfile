@@ -56,7 +56,6 @@ WORKDIR /var/www/html
 RUN git clone https://github.com/freescout-help-desk/freescout.git .
 RUN rm -rf \
            .editorconfig \
-           .env.example \
            .env.travis \
            .git \
            .gitattributes \
