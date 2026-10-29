@@ -6,6 +6,9 @@ $ php artisan key:generate   <-auto file APP_KEY in .env file
 
 .env file:
 ----------
+.If you want to use web installer **DO NOT** create `.env` file manually. 
+ If `.env` file exists in the root of your app, web installer won't run.
+
 .After modify .env file, run
 $ php artisan freescout:clear-cache
 
