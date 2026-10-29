@@ -1,9 +1,16 @@
-php:8.5.12-apache:
+php:8.5.12-apache image:
+------------------------
 Entrypoint: /usr/local/bin/docker-php-entrypoint
 CMD: apache2-foreground
 $ php artisan key:generate   <-auto file APP_KEY in .env file
 
+.env file:
+----------
+.After modify .env file, run
+$ php artisan freescout:clear-cache
+
 Dockerfile:
+-----------
 - RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
     && docker-php-ext-install -j$(nproc) \
@@ -42,5 +49,6 @@ FreeScout includes webklex/php-imap natively as its core email-fetching engine, 
 
 
 Debug:
+------
 $ docker logs freescout-app
 $ docker logs freescout-db
