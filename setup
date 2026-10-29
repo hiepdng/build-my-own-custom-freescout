@@ -25,7 +25,7 @@ for I in "${MY_VARS[@]}"; do
     echo $I=${!I} >> /var/www/html/.env
   fi
 done
-chown www-data:www-data /var/www/htnl/.env
+chown www-data:www-data /var/www/html/.env
 
 ### Running default php-apache entrypoint script
 exec docker-php-entrypoint "$@"
