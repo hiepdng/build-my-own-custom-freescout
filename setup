@@ -24,7 +24,7 @@ if [[ -e /var/www/html/.env ]]; then
   )
   for I in "${MY_VARS[@]}"; do
     if [[ -v $I ]]; then
-      sed  "/^$I/d" /var/www/html/.env
+      sed -i "/^$I/d" /var/www/html/.env
       echo $I=${!I} >> /var/www/html/.env
     fi
   done
