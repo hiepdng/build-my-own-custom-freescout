@@ -34,12 +34,11 @@ RUN docker-php-ext-install xml
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install curl
 RUN docker-php-ext-install pdo_mysql
-#RUN docker-php-ext-install mysqli
-#RUN docker-php-ext-install openssl
-#RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install iconv
+RUN docker-php-ext-install openssl
 #RUN docker-php-ext-install zlib
-#RUN docker-php-ext-install iconv
-#RUN docker-php-ext-install php-tokenizer
 #RUN docker-php-ext-install php-hash
 RUN rm -rf /usr/src/php
 
