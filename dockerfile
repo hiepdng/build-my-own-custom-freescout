@@ -48,7 +48,7 @@ RUN rm -rf /usr/src/php
 
 # Enable Apache rewrite module for Laravel routing
 RUN a2enmod rewrite
-RUN a2enmod headers
+#RUN a2enmod headers
 
 # Set working directory
 WORKDIR /var/www/html
