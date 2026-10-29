@@ -10,11 +10,11 @@ RUN apt-get install libzip-dev -y
 RUN apt-get install libicu-dev -y
 RUN apt-get install libxml2-dev -y
 RUN apt-get install libonig-dev -y
-#RUN apt-get install libssl-dev -y
-#RUN apt-get install libcurl4-openssl-dev -y
-#RUN apt-get install libkrb5-dev -y
+RUN apt-get install libcurl4-openssl-dev -y
 RUN apt-get install git -y
 RUN apt-get install zip -y
+#RUN apt-get install libssl-dev -y
+#RUN apt-get install libkrb5-dev -y
 #RUN apt-get install unzip -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -54,6 +54,20 @@ WORKDIR /var/www/html
 
 # Download the latest FreeScout stable release
 RUN git clone https://github.com/freescout-help-desk/freescout.git .
+RUN rm -rf \
+           .editorconfig \
+           .env.example \
+           .env.travis \
+           .git \
+           .gitattributes \
+           .gitcommit \
+           .github \
+           .gitignore \
+           .htaccess \
+           .travis.yml \
+           *.md \
+           LICENSE \
+           tests
 RUN chown -R www-data:www-data .
 RUN find . -type f -exec chmod 664 {} \;
 RUN find . -type d -exec chmod 775 {} \;
