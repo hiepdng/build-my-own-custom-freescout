@@ -1,7 +1,8 @@
-#!/usr/bin/sh -e
+#!/usr/bin/bash -e
 set -e
 
-MY_VARS=("APP_URL"
+MY_VARS=(
+         "APP_URL"
          "SESSION_SECURE_COOKIE"
          "APP_PROXY"
          "APP_CUSTOM_MAIL_HEADERS"
@@ -10,13 +11,14 @@ MY_VARS=("APP_URL"
          "APP_TRUSTED_PROXIES"
          "APP_REMOTE_HOST_WHITE_LIST"
          "DB_CONNECTION"
-         "DB_HOST=localhost"
+         "DB_HOST"
          "DB_PORT"
          "DB_DATABASE"
          "DB_USERNAME"
          "DB_PASSWORD"
          "APP_KEY"
-         "APP_DEBUG")
+         "APP_DEBUG"
+)
 
 for I in "${MY_VARS[@]}"; do
   if [[ -v $I ]]; then
