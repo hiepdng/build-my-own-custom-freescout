@@ -20,6 +20,7 @@ MY_VARS=(
          "APP_KEY"
          "APP_DEBUG"
 )
+rm -f /var/www/html/.env
 for I in "${MY_VARS[@]}"; do
   if [[ -v $I ]]; then
     echo $I=${!I} >> /var/www/html/.env
