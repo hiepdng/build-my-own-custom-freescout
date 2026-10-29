@@ -1,0 +1,25 @@
+#!/usr/bin/sh -e
+set -e
+
+MY_VARS=("APP_URL"
+         "SESSION_SECURE_COOKIE"
+         "APP_PROXY"
+         "APP_CUSTOM_MAIL_HEADERS"
+         "APP_UPDATE_FOLDER_COUNTERS_IN_BACKGROUND"
+         "APP_TIMEZONE"
+         "APP_TRUSTED_PROXIES"
+         "APP_REMOTE_HOST_WHITE_LIST"
+         "DB_CONNECTION"
+         "DB_HOST=localhost"
+         "DB_PORT"
+         "DB_DATABASE"
+         "DB_USERNAME"
+         "DB_PASSWORD"
+         "APP_KEY"
+         "APP_DEBUG")
+
+for I in "${MY_VARS[@]}"; do
+  if [[ -v $I ]]; then
+    echo $I=${!I} >> /var/www/html/.env
+  fi
+done
