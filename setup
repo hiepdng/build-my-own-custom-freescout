@@ -1,6 +1,7 @@
 #!/usr/bin/bash -e
 set -e
 
+### Writing environment variables from freescout_app to .env
 MY_VARS=(
          "APP_URL"
          "SESSION_SECURE_COOKIE"
@@ -19,11 +20,12 @@ MY_VARS=(
          "APP_KEY"
          "APP_DEBUG"
 )
-
 for I in "${MY_VARS[@]}"; do
   if [[ -v $I ]]; then
     echo $I=${!I} >> /var/www/html/.env
   fi
 done
+chown www-data:www-date /var/www/htnl/.env
 
+### Running default php-apache entrypoint script
 exec docker-php-entrypoint "$@"
