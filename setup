@@ -20,6 +20,7 @@ if [[ -e /var/www/html/.env ]]; then
            "DB_USERNAME"
            "DB_PASSWORD"
            "APP_DEBUG"
+           "APP_KEY"
   )
   for I in "${MY_VARS[@]}"; do
     if [[ -v $I ]]; then
