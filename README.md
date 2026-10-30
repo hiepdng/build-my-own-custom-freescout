@@ -47,8 +47,9 @@ freescout$
 ```
 <br>
 
-- **Fresh Re-Installation**:  
-  In case something wrong with FreeScout and you want a totally new installation, run the following commands:  
+- **Fresh Installation**:  
+  In case something wrong with FreeScout and you want a totally new installation, run the following commands:
+  Note: all data in database directory will be deleted.  
 ```
 # Remove containers and images:
 docker rm -f freescout-app freescout-db
