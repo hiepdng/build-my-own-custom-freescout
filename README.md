@@ -14,3 +14,13 @@ Run FreeScout:
 ```
 docker compose up -d
 ```
+Initial setup:
+Go to http://localhost:8080/install and follow instructions.
+
+Debuging:
+```
+# Goto Freescout app OS:
+docker exec -it freescout_app bash
+
+freescout$ 
+```
