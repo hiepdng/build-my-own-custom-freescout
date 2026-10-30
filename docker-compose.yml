@@ -47,10 +47,10 @@ services:
     driver_opts:
       type: none
       o: bind
-      device: /home/temp/build-my-own-custom-freescout/freescout_data
+      device: /home/temp/docker_custom_build_freescout/freescout_data
   freescout_db_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/temp/build-my-own-custom-freescout/freescout_db_data
+      device: /home/temp/docker_custom_build_freescout/freescout_db_data
