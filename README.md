@@ -1,4 +1,7 @@
-# <div align="center">$${\color{green}Custom \space Build \space a \space a  \space FreeScout \space Docker \space Image}$$
+# <div align="center">$${\color{purple}Custom \space Build \space a \space a  \space FreeScout \space Docker \space Image}$$
+<br>
+
+This GitHub repository provides the source code to build FreeScout application - a self-hosted open-source shared inboxes, help desk, ticketing system. The source code is used to build FreeScout application on docker image. This code is tested on Ubuntu 26.04.1 LTS and expected to work on Linux based Operating Systems.  
 
 This FreeScout custom build docker image is based on:  
  • [FreeScout application](https://github.com/freescout-help-desk/freescout)  
@@ -87,7 +90,14 @@ docker exec -it freescout_db bash
 # Goto Freescout app OS:
 docker exec -it freescout_app bash
 
-freescout$ 
+# Some useful commands
+freescout# php artisan freescout:check-requirements      <-check requirements
+freescout# php artisan queue:failed                      <-list all of the failed queue jobs
+freescout# php artisan freescout:clear-cache             <-clean cache
+freescout# php artisan freescout:fetch-emails            <-fetch emails
+freescout# php artisan  freescout:fetch-monitor          <-Check emails fetching
+freescout# php artisan freescout:create-user             <-create a new user
+freescout# php artisan freescout:logout-users            <-logout all users
 ```
 ◦ If `.env` file lacks of `APP_KEY value`, run below commands:  
   ```
