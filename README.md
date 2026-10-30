@@ -1,4 +1,4 @@
-# <div align="center">$${\color{purple}Custom \space Build \space a \space a  \space FreeScout \space Docker \space Image}$$
+# <div align="center">$${\color{purple}Custom \space Build \space a  \space FreeScout \space Docker \space Image}$$
 <br>
 
 This GitHub repository provides the source code to build FreeScout application - a self-hosted open-source shared inboxes, help desk, ticketing system. The source code is used to build FreeScout application on docker image. This code is tested on Ubuntu 26.04.1 LTS and expected to work on Linux based Operating Systems.  
