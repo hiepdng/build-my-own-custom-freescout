@@ -27,7 +27,10 @@ docker compose up -d
 <br>
 
 - **Login to FreeScout webpage:**  
-Go to http://localhost:8080/
+  - Go to http://localhost:8080/  
+  - The default URL to login the FreeScout web page is http://localhost:8080/. Edit `APP_URL` parameter from the `docker-compose.yml` to change to your own URL.  
+  - The default admin username and password to login the FreeScout web page is `admin@example.com` and `admin_passwd`. Edit `setup` file to set your own ones.  
+  
 <br>
 
 ---
