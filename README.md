@@ -1,24 +1,29 @@
 ## My Custom FreeScout Build
 
-Download the repository:  
+- **Download the repository:**  
 ```
-git clone git@github.com:hiepdng/build-my-own-custom-freescout.git
+git clone git@github.com:hiepdng/docker_custom_build_freescout.git
 ```
 
-Build FreeScout image:  
+- **Build the FreeScout image:**  
 ```
+cd docker_custom_build_freescou
 docker build -t my-custom-freescout:latest .
 ```
 
-Run FreeScout:  
+- **Run the FreeScout container:**  
 ```
 docker compose up -d
 ```
-Initial setup:
-Go to http://localhost:8080/install and follow instructions.
 
-Debuging:
+- **Login to FreeScout webpage:**  
+Go to http://localhost:8080/
+
+- **Debugging:**  
 ```
+# Goto Freescout database OS:
+docker exec -it freescout_db bash
+
 # Goto Freescout app OS:
 docker exec -it freescout_app bash
 
