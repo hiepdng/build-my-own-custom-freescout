@@ -1,14 +1,13 @@
-version: '3.8'
-
 services:
   freescout-app:
     image: my-custom-freescout:latest
+    user: "www-data:www-data" # Passes your terminal environment variables
     container_name: freescout-app
     restart: unless-stopped
     ports:
       - "8080:80"
     volumes:
-      - ./freescout_data:/var/www/html
+      - freescout_data:/var/www/html/storage
     environment:
       ### Freescout variables in .env file
       - APP_URL=http://localhost:8080
@@ -27,20 +26,31 @@ services:
       - DB_PASSWORD=secret_password
       # - APP_KEY=
     depends_on:
-      freescout-db:
+      - freescout-db
 
   freescout-db:
-    image: mariadb:10.6
+    image: mariadb:13.0.2
+    user: "mysql:mysql"      
     container_name: freescout-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: freescout
-      MYSQL_USER: freescout_user
-      MYSQL_PASSWORD: secret_password
-      MYSQL_ROOT_PASSWORD: root_secret_password
+      MARIADB_DATABASE: freescout
+      MARIADB_USER: freescout
+      MARIADB_PASSWORD: secret_password
+      MARIADB_ROOT_PASSWORD: root_secret_password
     volumes:
-      - ./freescout_db_data:/var/lib/mysql
+      - freescout_db_data:/var/lib/mysql
 
-volumes:
+    volumes:
   freescout_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/temp/build-my-own-custom-freescout/freescout_data
   freescout_db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/temp/build-my-own-custom-freescout/freescout_db_data
