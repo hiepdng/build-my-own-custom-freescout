@@ -96,7 +96,7 @@ docker compose up -d
     ```
     gunzip < mariadb_backup_xxxx.sql.gz | docker exec -i freescout-db mariadb -u root -p<your_root_password>
     ```
-     Where: <your_root_password> is specified in the docker-compose-yml file
+     Where: <your_root_password> is specified in the docker-compose.yml file
 <br>
 
 ---
