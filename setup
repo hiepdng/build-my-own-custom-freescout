@@ -1,7 +1,7 @@
 #!/usr/bin/bash -e 
 set -e
 
-### Writing environment variables from freescout_app to .env
+### Write environment variables from docker-compose.yml to .env
 ### Only modify the .env file if it exists.
 if [[ -e /var/www/html/.env ]]; then
   MY_VARS=(
@@ -33,7 +33,7 @@ if [[ -e /var/www/html/.env ]]; then
 fi
 
 
-### Run FreeScout seup. Run only once
+### Run FreeScout setup. Run only once
 if [[ ! -f /var/www/html/storage/.installed ]]; then
   php artisan key:generate
   php artisan freescout:clear-cache
