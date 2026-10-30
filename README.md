@@ -29,7 +29,36 @@ docker compose up -d
 - **Login to FreeScout webpage:**  
   - Go to http://localhost:8080/  
   - The default URL to login the FreeScout web page is http://localhost:8080/. Edit `APP_URL` parameter from the `docker-compose.yml` to change to your own URL.  
-  - The default admin username and password to login the FreeScout web page is `admin@example.com` and `admin_passwd`. Edit `setup` file to set your own ones.  
+  - The default admin username and password to login the FreeScout web page is `admin@example.com` and `admin_passwd`. Edit `setup` file to set your own ones.
+  - Mailbox Settings:  
+    - **Manage** -> **Mailboxes** -> **New Mailbox**  
+      - **Edit Mailbox**  
+        Mailbox Name: <Your Mailbox Name>  
+        Email Address: <yourusername@gmail.com>  
+        From Name: Mailbox Name  
+        Status After Replying: Pending  
+        Default Assignee: Person Replying (if Unassigned)  
+        Save  
+      - **Connection Settings**  
+        **Sending Emails**  
+          SMTP  
+          SMTP Server: smtp.gmail.com  
+          Port: 587  
+          Username: <yourusername@gmail.com>  
+          Password: xxx (gmail app password)  
+          Encryption: TLS (+StartTLS)  
+          Send Test To:  <yourusername@gmail.com>  
+          Save Settings  
+        **Fetching Emails**  
+          Fetch From:  <yourusername@gmail.com>  
+          Protocol: POP3  
+          Server: pop.gmail.com  
+          Port:  995  
+          Username: <yourusername@gmail.com>  
+          Password: xxx (gmail app password)  
+          Encryption: TLS (+StartTLS)
+          Save Settings
+        
   
 <br>
 
@@ -45,10 +74,18 @@ docker exec -it freescout_app bash
 
 freescout$ 
 ```
+◦ If `.env` file lacks of `APP_KEY value`, run below commands:  
+  ```
+  $ docker exec -it freescout_app bash
+  container# php artisan key:generate
+  container# php artisan freescout:clear-cache
+  ```
+  
+  
 <br>
 
 - **Fresh Installation**:  
-  In case something wrong with FreeScout and you want a totally new installation, run the following commands:
+  In case something wrong with FreeScout and you want a totally new installation, run the following commands:  
   Note: all data in database directory will be deleted.  
 ```
 # Remove containers and images:
