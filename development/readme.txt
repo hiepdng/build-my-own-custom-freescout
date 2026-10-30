@@ -91,6 +91,9 @@ FreeScout includes webklex/php-imap natively as its core email-fetching engine, 
 FreeScout directory:
 --------------------
 .htaccess: is required by rewrite module using Apache
+.env.example: required
+.Make sure all files/dirs are under www-data:www-data owner
+
 
 Debug:
 ------
