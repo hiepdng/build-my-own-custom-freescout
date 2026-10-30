@@ -27,8 +27,7 @@ services:
       - DB_PASSWORD=secret_password
       # - APP_KEY=
     depends_on:
-      - freescout-db:
-          condition: service_healthy # Waits until MariaDB passes its health check
+      freescout-db:
 
   freescout-db:
     image: mariadb:10.6
