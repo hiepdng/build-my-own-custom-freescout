@@ -11,20 +11,26 @@ This FreeScout custom build docker image is based on:
 ```
 git clone git@github.com:hiepdng/docker_custom_build_freescout.git
 ```
+<br>
 
-- **Build the FreeScout image:**  
+- **Build FreeScout images:**  
 ```
-cd docker_custom_build_freescou
+cd docker_custom_build_freescout
 docker build -t my-custom-freescout:latest .
 ```
+<br>
 
-- **Run the FreeScout container:**  
+- **Run FreeScout containers:**  
 ```
 docker compose up -d
 ```
+<br>
 
 - **Login to FreeScout webpage:**  
 Go to http://localhost:8080/
+<br>
+
+---
 
 - **Debugging:**  
 ```
@@ -35,4 +41,23 @@ docker exec -it freescout_db bash
 docker exec -it freescout_app bash
 
 freescout$ 
+```
+<br>
+
+- **Fresh Re-Installation**:  
+  In case something wrong with FreeScout and you want a totally new installation, run the following commands:  
+```
+# Remove containers and images:
+docker rm -f freescout-app freescout-db
+docker rmi mariadb:13.0.2 my-custom-freescout:latest
+
+# Create volume directory:
+cd docker_custom_build_freescout
+sudo rm -Rf freescout_data freescout_db_data
+mkdir reescout_data freescout_db_data
+
+# Run new FreeScout application:
+cd docker_custom_build_freescout
+docker build -t my-custom-freescout:latest .
+docker compose up -d
 ```
