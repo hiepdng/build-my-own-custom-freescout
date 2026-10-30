@@ -81,6 +81,17 @@ docker compose up -d
 <br>
 
 ---
+**FreeScout Data Backup and Restore:**  
+  FreeScout saves its data in two locations:  
+  - The `storage/` directory in the freescout_app container (is also a `freescout_data/` volume mount directory in your host OS.) It keeps all email attachments, cache files and temp files.   You can just simply backup this entire directory.  
+  - The Mariadb database. It keeps emails, tickets, user profiles, and application settings. To backup the entire database:
+  ```
+  docker exec -i freescout_db mariadb-dump -u root -p<your_root_password> --all-databases | gzip > mariadb_backup_$(date +%F).sql.gz
+  ```
+
+<br>
+
+---
 
 - **Debugging:**  
 ```
