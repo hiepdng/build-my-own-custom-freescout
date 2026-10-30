@@ -28,6 +28,7 @@ if [[ -e /var/www/html/.env ]]; then
       echo $I=${!I} >> /var/www/html/.env
     fi
   done
+  php artisan freescout:clear-cache
   find /var/www/html -user root -exec chown www-data:www-data {} +
 fi
 
