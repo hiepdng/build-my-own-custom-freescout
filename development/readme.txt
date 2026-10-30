@@ -9,6 +9,12 @@ $ php artisan key:generate   <-auto file APP_KEY in .env file
 .If you want to use web installer **DO NOT** create `.env` file manually. 
  If `.env` file exists in the root of your app, web installer won't run.
 
+.Force FreeScout to use the Webklex library which does not require 
+ the native PHP IMAP extension
+APP_NEW_FETCHING_LIBRARY=true
+.For versions bypassing native IMAP extensions during POP3 fetching
+APP_USE_NEW_POP3_LIB=true
+
 .After modify .env file, run
 $ php artisan freescout:clear-cache
 
