@@ -20,6 +20,11 @@ Files provided:
 ├── README.md  
 └── setup  
 
+Where:  
+ - The **setup** file is the entrypoint script. It is also used to set FreeScout admin username and password to login the FreeScout web page.  
+ - The **Dockerfile** file is used to build the FreeScout docker images.  
+ - The **docker-compose.yml** file is used to run The FreeScout app and FreeScout database containers. It also holds all parameter values for the FreeScout's .env file, and hold usernames and password of Mariadb database accounts.  
+  
 <br>
 
 ## Set up to run FreeScout on Docker container
@@ -118,7 +123,7 @@ freescout# php artisan  freescout:fetch-monitor          <-Check emails fetching
 freescout# php artisan freescout:create-user             <-create a new user
 freescout# php artisan freescout:logout-users            <-logout all users
 ```
-◦ If `.env` file lacks of `APP_KEY value`, run below commands:  
+◦ If the `.env` file lacks of `APP_KEY value`, run below commands to create a new one:  
   ```
   $ docker exec -it freescout-app bash
   container# php artisan key:generate
