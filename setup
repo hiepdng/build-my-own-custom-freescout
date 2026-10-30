@@ -4,6 +4,11 @@ set -e
 ### Write environment variables from docker-compose.yml to .env
 ### Only modify the .env file if it exists.
 if [[ -e /var/www/html/.env ]]; then
+  # This is for using Webklex library to fetch email
+  echo "APP_NEW_FETCHING_LIBRARY=true" >> /var/www/html/.env
+  echo "APP_USE_NEW_POP3_LIB=true" >> /var/www/html/.env
+
+  # Write .env variables
   MY_VARS=(
            "APP_URL"
            "SESSION_SECURE_COOKIE"
