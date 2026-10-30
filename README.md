@@ -33,30 +33,30 @@ docker compose up -d
   - Mailbox Settings:  
     - **Manage** -> **Mailboxes** -> **New Mailbox**  
       - **Edit Mailbox**  
-        Mailbox Name: <Your Mailbox Name>  
-        Email Address: <yourusername@gmail.com>  
-        From Name: Mailbox Name  
-        Status After Replying: Pending  
-        Default Assignee: Person Replying (if Unassigned)  
+        • Mailbox Name: <Your Mailbox Name>  
+        • Email Address: <yourusername@gmail.com>  
+        • From Name: Mailbox Name  
+        • Status After Replying: Pending  
+        • Default Assignee: Person Replying (if Unassigned)  
         Save  
       - **Connection Settings**  
         **Sending Emails**  
-          SMTP  
-          SMTP Server: smtp.gmail.com  
-          Port: 587  
-          Username: <yourusername@gmail.com>  
-          Password: xxx (gmail app password)  
-          Encryption: TLS (+StartTLS)  
-          Send Test To:  <yourusername@gmail.com>  
+          • SMTP  
+          • SMTP Server: smtp.gmail.com  
+          • Port: 587  
+          • Username: <yourusername@gmail.com>  
+          • Password: xxx (gmail app password)  
+          • Encryption: TLS (+StartTLS)  
+          • Send Test To:  <yourusername@gmail.com>  
           Save Settings  
         **Fetching Emails**  
-          Fetch From:  <yourusername@gmail.com>  
-          Protocol: POP3  
-          Server: pop.gmail.com  
-          Port:  995  
-          Username: <yourusername@gmail.com>  
-          Password: xxx (gmail app password)  
-          Encryption: TLS (+StartTLS)
+          • Fetch From:  <yourusername@gmail.com>  
+          • Protocol: POP3  
+          • Server: pop.gmail.com  
+          • Port:  995  
+          • Username: <yourusername@gmail.com>  
+          • Password: xxx (gmail app password)  
+          • Encryption: TLS (+StartTLS)  
           Save Settings
         
   
