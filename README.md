@@ -1,4 +1,4 @@
-# <div align="center">$${\color{orange}Custom \space Build \space a \space a  \space FreeScout \space Docker \space Image}$$
+# <div align="center">$${\color{green}Custom \space Build \space a \space a  \space FreeScout \space Docker \space Image}$$
 
 This FreeScout custom build docker image is based on:  
  • [FreeScout application](https://github.com/freescout-help-desk/freescout)  
