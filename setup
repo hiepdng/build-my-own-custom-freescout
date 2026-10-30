@@ -5,6 +5,8 @@ set -e
 ### Only modify the .env file if it exists.
 if [[ -e /var/www/html/.env ]]; then
   # This is for using Webklex library to fetch email
+  sed -i "/^APP_NEW_FETCHING_LIBRARY/d" /var/www/html/.env
+  sed -i "/^APP_USE_NEW_POP3_LIB/d" /var/www/html/.env
   echo "APP_NEW_FETCHING_LIBRARY=true" >> /var/www/html/.env
   echo "APP_USE_NEW_POP3_LIB=true" >> /var/www/html/.env
 
