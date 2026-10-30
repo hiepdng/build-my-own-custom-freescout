@@ -106,7 +106,7 @@ docker compose up -d
 
 ---
 
-- **Debugging:**  
+**Debugging:**  
 ```
 # Goto Freescout database OS:
 docker exec -it freescout-db bash
@@ -129,11 +129,11 @@ freescout# php artisan freescout:logout-users            <-logout all users
   container# php artisan key:generate
   container# php artisan freescout:clear-cache
   ```
-  
-  
 <br>
 
-- **Fresh Installation**:  
+---
+
+**Fresh Installation**:  
   In case something wrong with FreeScout and you want a totally new installation, run the following commands:  
   Note: all data in database directory will be deleted.  
 ```
