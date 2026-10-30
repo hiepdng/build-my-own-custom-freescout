@@ -93,7 +93,7 @@ FreeScout directory:
 .htaccess: is required by rewrite module using Apache
 .env.example: required
 .Make sure all files/dirs are under www-data:www-data owner
-
+$ find /var/www/html -user root -exec chown www-data:www-data {} +
 
 Debug:
 ------
