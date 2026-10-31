@@ -54,8 +54,9 @@ docker compose up -d
   - The default URL to login the FreeScout web page is http://localhost:8080/. Edit `APP_URL` parameter from the `docker-compose.yml` to change to your own URL.  
   - The default admin username and password to login the FreeScout web page is `admin@example.com` and `admin_passwd`. Edit the `setup` file to set your own default username and password.  
   - Mailbox Settings:
-    Once you login to your FreeScout app. You can setup `Mailboxex`, `Sending Emails` option and `Fetching Emails` option. The below is the settings that work for me.
-    Note: For gmail, you can't simply add your gmail password at the slot. It only accept gmail app password. An app password is a 16-digit passcode that lets third-party apps or non-Google devices access your Google Account when they do not support standard "Sign in with Google" verification. Go to [Google App Passwords page](https://support.google.com/mail/answer/185833?hl=en) to create gmail app password.  
+    Once you login to your FreeScout app. You can setup `Mailboxex`, `Sending Emails` option and `Fetching Emails` option. The below is the settings that work for me.  
+    Note: For gmail, you can't simply add your gmail password at the slot. It only accepts a gmail app password. An app password is a 16-digit passcode that lets third-party apps or non-Google devices access your Google Account when they do not support standard "Sign in with Google" verification. Go to [Google App Passwords page](https://support.google.com/mail/answer/185833?hl=en) to create your gmail app password.
+    
     - **Manage** -> **Mailboxes** -> **New Mailbox**  
       - **Edit Mailbox**  
         • Mailbox Name: <Your Mailbox Name>  
