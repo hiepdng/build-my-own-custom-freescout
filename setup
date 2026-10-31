@@ -27,7 +27,6 @@ if [[ -e /var/www/html/.env ]]; then
            "DB_USERNAME"
            "DB_PASSWORD"
            "APP_DEBUG"
-           "APP_KEY"
   )
   for I in "${MY_VARS[@]}"; do
     if [[ -v $I ]]; then
@@ -40,7 +39,7 @@ if [[ -e /var/www/html/.env ]]; then
 fi
 
 
-### Run FreeScout setup. Run only once
+### Run FreeScout seup. Run only once
 if [[ ! -f /var/www/html/storage/.installed ]]; then
   php artisan key:generate
   php artisan freescout:clear-cache
@@ -60,3 +59,4 @@ fi
 
 ### Running default php-apache entrypoint script
 exec docker-php-entrypoint "$@"
+
