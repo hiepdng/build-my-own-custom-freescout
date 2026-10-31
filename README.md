@@ -111,16 +111,24 @@ $ sudo systemctl restart cron.service
   FreeScout saves its data in two locations:  
   - The `storage/` directory in the freescout_data container (is also a `freescout_data/` volume mount directory in your host OS.) It keeps all email attachments, cache files and temp files.   You can just simply backup this entire directory.  
   - The Mariadb database. It keeps emails, tickets, user profiles, and application settings.
-    - To backup the entire database:
-    ```
+    - To backup the entire databases:
+    ```bash
     docker exec -i freescout-db mariadb-dump -u root -p<your_root_password> --all-databases \
           | gzip > mariadb_backup_$(date +%F).sql.gz
     ```
 
-    - To restore your database backup:  
-    ```
+    - To restore all databases from your database backup:  
+    ```bash
     gunzip < mariadb_backup_xxxx.sql.gz | docker exec -i freescout-db mariadb -u root -p<your_root_password>
     ```
+
+    -To restore only freescout database:
+    ```bash
+    docker exec -i freescout-db mariadb -u root -p<your_root_password> -e "DROP DATABASE IF EXISTS freescout;"
+    docker exec -i freescout-db mariadb -u root -p<your_root_password> -e "CREATE DATABASE freescout;"
+    gunzip < mariadb_backup_xxxx.sql.gz | docker exec -i freescout-db mariadb -u root -p<your_root_password> --one-database freescout
+    ```
+    
      Where: <your_root_password> is specified in the docker-compose.yml file
 <br>
 
