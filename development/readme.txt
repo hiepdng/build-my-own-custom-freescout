@@ -1,3 +1,6 @@
+This file just contains information I collected to help me building my FreeScout docker container. 
+
+
 php:8.5.12-apache image:
 ------------------------
 Entrypoint: /usr/local/bin/docker-php-entrypoint
