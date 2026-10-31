@@ -30,7 +30,7 @@ services:
 
   freescout-db:
     image: mariadb:13.0.2
-    user: "mysql:mysql"
+    user: "mysql:mysql" 
     container_name: freescout-db
     restart: unless-stopped
     environment:
@@ -54,3 +54,4 @@ volumes:
       type: none
       o: bind
       device: /home/temp/docker_custom_build_freescout/freescout_db_data
+
