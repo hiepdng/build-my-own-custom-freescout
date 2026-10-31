@@ -37,6 +37,7 @@ git clone git@github.com:hiepdng/docker_custom_build_freescout.git
 - **Build FreeScout images:**  
 ```
 cd docker_custom_build_freescout
+mkdir freescout_data freescout_db_data
 docker build -t my-custom-freescout:latest .
 ```
 <br>
