@@ -15,7 +15,7 @@ services:
       # - APP_PROXY=
       # - APP_CUSTOM_MAIL_HEADERS="IsTransactional:True;X-Custom-Header:value"
       # - APP_UPDATE_FOLDER_COUNTERS_IN_BACKGROUND=true
-      # - APP_TIMEZONE=Europe/London
+      - APP_TIMEZONE=America/Los_Angeles
       # - APP_TRUSTED_PROXIES=192.168.1.1,192.168.1.2,192.168.1.3
       # - APP_REMOTE_HOST_WHITE_LIST=""
       - DB_CONNECTION=mysql
@@ -30,7 +30,7 @@ services:
 
   freescout-db:
     image: mariadb:13.0.2
-    user: "mysql:mysql"      
+    user: "mysql:mysql"
     container_name: freescout-db
     restart: unless-stopped
     environment:
