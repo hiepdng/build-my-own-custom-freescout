@@ -41,7 +41,7 @@ services:
     volumes:
       - freescout_db_data:/var/lib/mysql
 
-    volumes:
+volumes:
   freescout_data:
     driver: local
     driver_opts:
