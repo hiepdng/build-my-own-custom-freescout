@@ -161,7 +161,7 @@ freescout# php artisan freescout:logout-users            <-logout all users
 docker rm -f freescout-app freescout-db
 docker rmi mariadb:13.0.2 my-custom-freescout:latest
 
-# Create volume directory:
+# Create volume directories:
 cd docker_custom_build_freescout
 sudo rm -Rf freescout_data freescout_db_data
 mkdir reescout_data freescout_db_data
