@@ -18,7 +18,10 @@ RUN apt-get install zip -y
 #RUN apt-get install unzip -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+
 # Configure and install PHP extensions needed for FreeScout
+#    && docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
+
 RUN mkdir -p /usr/src/php && tar Jxvf /usr/src/php.tar.xz -C /usr/src/php --strip-components=1
 RUN cp /usr/src/php/ext/openssl/config0.m4 /usr/src/php/ext/openssl/config.m4
 RUN cp /usr/src/php/ext/zlib/config0.m4 /usr/src/php/ext/zlib/config.m4
@@ -42,17 +45,25 @@ RUN docker-php-ext-install openssl
 #RUN docker-php-ext-install php-hash
 RUN rm -rf /usr/src/php
 
-# Install Composer
-#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # Enable Apache rewrite module for Laravel routing
 RUN a2enmod rewrite
-#RUN a2enmod headers
+RUN a2enmod headers
+
+#RUN pecl install imap \
+# && docker-php-ext-enable imap
+
+# Install Composer
+#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www/html
 
+# copy setup script
+COPY ./setup /setup
+RUN chmod +x /setup
+
 # Download the latest FreeScout stable release
+USER www-data
 RUN git clone https://github.com/freescout-help-desk/freescout.git .
 RUN rm -rf \
            .editorconfig \
@@ -65,21 +76,25 @@ RUN rm -rf \
            .travis.yml \
            *.md \
            LICENSE \
-           tests
-RUN chown -R www-data:www-data .
+           tests 
+#RUN chown -R www-data:www-data .
 RUN find . -type f -exec chmod 664 {} \;
 RUN find . -type d -exec chmod 775 {} \;
 RUN find . -name *.sh -exec chmod ug+x {} \;
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN cp .env.example .env
+
+# install php-imap
+#RUN git config --global --add safe.directory /var/www/html/freescout
+#RUN composer require webklex/php-imap
+
 
 # Set the document root to FreeScout's public folder if needed
+USER root
 ENV APACHE_DOCUMENT_ROOT="/var/www/html"
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# copy setup script
-COPY ./setup /setup
-RUN chmod +x /setup
 
 # Expose HTTP port
 EXPOSE 80
