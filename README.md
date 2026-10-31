@@ -14,9 +14,7 @@ Files provided:
 ├── **development/**  
 │   └── readme.txt  
 ├── docker-compose.yml  
-├── Dockerfile  
-├── **freescout_data/**  
-├── **freescout_db_data/**  
+├── Dockerfile   
 ├── README.md  
 └── setup  
 
