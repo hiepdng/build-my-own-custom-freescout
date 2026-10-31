@@ -90,6 +90,7 @@ docker compose up -d
 ---
 
 **Setup Cronjob for FreeScout's Update and Scheduled Tasks:**  
+
 Create cronjobs on the host system to evaluate and execute any FreeScout's scheduled tasks (such as fetching emails, sending emails, etc.) and running FreeScout update.  
 
 - Create a /etc/cron.d/freescout_cronjob file:
@@ -108,6 +109,7 @@ $ sudo systemctl restart cron.service
 ---
 
 **FreeScout Data Backup and Restore:**  
+
   FreeScout saves its data in two locations:  
   - The `storage/` directory in the freescout_data container (is also a `freescout_data/` volume mount directory in your host OS.) It keeps all email attachments, cache files and temp files.   You can just simply backup this entire directory.  
   - The Mariadb database. It keeps emails, tickets, user profiles, and application settings.
