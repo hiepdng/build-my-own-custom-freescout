@@ -50,10 +50,12 @@ docker compose up -d
 <br>
 
 - **Login to FreeScout webpage:**  
-  - Go to http://localhost:8080/  
+  - Go to http://localhost:8080/ to login the FreeScout app.  
   - The default URL to login the FreeScout web page is http://localhost:8080/. Edit `APP_URL` parameter from the `docker-compose.yml` to change to your own URL.  
-  - The default admin username and password to login the FreeScout web page is `admin@example.com` and `admin_passwd`. Edit `setup` file to set your own ones.
-  - Mailbox Settings:  
+  - The default admin username and password to login the FreeScout web page is `admin@example.com` and `admin_passwd`. Edit the `setup` file to set your own default username and password.  
+  - Mailbox Settings:
+    Once you login to your FreeScout app. You can setup `Mailboxex`, `Sending Emails` option and `Fetching Emails` option. The below is the settings that work for me.
+    Note: For gmail, you can't simply add your gmail password at the slot. It only accept gmail app password. An app password is a 16-digit passcode that lets third-party apps or non-Google devices access your Google Account when they do not support standard "Sign in with Google" verification. Go to [Google App Passwords page](https://support.google.com/mail/answer/185833?hl=en) to create gmail app password.  
     - **Manage** -> **Mailboxes** -> **New Mailbox**  
       - **Edit Mailbox**  
         • Mailbox Name: <Your Mailbox Name>  
@@ -82,7 +84,24 @@ docker compose up -d
           • Encryption: TLS (+StartTLS)  
           Save Settings
         
-  
+<br>
+
+---
+
+**Setup Cronjob for FreeScout's Update and Scheduled Tasks:**  
+Create cronjobs on the host system to evaluate and execute any FreeScout's scheduled tasks (such as fetching emails, sending emails, etc.) and running FreeScout update.  
+
+- Create a /etc/cron.d/freescout_cronjob file:
+```bash
+* * * * * docker exec freescout-app php artisan schedule:run >> /dev/null 2>&1
+0 0 * * 0 docker exec freescout-app bash -c "tools/update.sh --yes >> storage/logs/update.log"
+```
+- Restart system cron service:
+```
+$ sudo systemctl restart cron.service
+```
+
+ 
 <br>
 
 ---
@@ -93,7 +112,7 @@ docker compose up -d
   - The Mariadb database. It keeps emails, tickets, user profiles, and application settings.
     - To backup the entire database:
     ```
-    docker exec -i freescout_db mariadb-dump -u root -p<your_root_password> --all-databases \
+    docker exec -i freescout-db mariadb-dump -u root -p<your_root_password> --all-databases \
           | gzip > mariadb_backup_$(date +%F).sql.gz
     ```
 
